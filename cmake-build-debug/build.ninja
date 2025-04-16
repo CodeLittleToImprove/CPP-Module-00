@@ -41,35 +41,78 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /home/kunel/CLionProjects/CPP-Module-00/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target cpp00
+# Object build statements for EXECUTABLE target cpp00_ex_00
 
 
 #############################################
-# Order-only phony target for cpp00
+# Order-only phony target for cpp00_ex_00
 
-build cmake_object_order_depends_target_cpp00: phony || .
+build cmake_object_order_depends_target_cpp00_ex_00: phony || .
 
-build CMakeFiles/cpp00.dir/ex00/megaphone.cpp.o: CXX_COMPILER__cpp00_unscanned_Debug /home/kunel/CLionProjects/CPP-Module-00/ex00/megaphone.cpp || cmake_object_order_depends_target_cpp00
-  DEP_FILE = CMakeFiles/cpp00.dir/ex00/megaphone.cpp.o.d
+build CMakeFiles/cpp00_ex_00.dir/ex00/MegaPhone.cpp.o: CXX_COMPILER__cpp00_ex_00_unscanned_Debug /home/kunel/CLionProjects/CPP-Module-00/ex00/MegaPhone.cpp || cmake_object_order_depends_target_cpp00_ex_00
+  DEP_FILE = CMakeFiles/cpp00_ex_00.dir/ex00/MegaPhone.cpp.o.d
   FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/cpp00.dir
-  OBJECT_FILE_DIR = CMakeFiles/cpp00.dir/ex00
+  OBJECT_DIR = CMakeFiles/cpp00_ex_00.dir
+  OBJECT_FILE_DIR = CMakeFiles/cpp00_ex_00.dir/ex00
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target cpp00
+# Link build statements for EXECUTABLE target cpp00_ex_00
 
 
 #############################################
-# Link the executable cpp00
+# Link the executable cpp00_ex_00
 
-build cpp00: CXX_EXECUTABLE_LINKER__cpp00_Debug CMakeFiles/cpp00.dir/ex00/megaphone.cpp.o
+build cpp00_ex_00: CXX_EXECUTABLE_LINKER__cpp00_ex_00_Debug CMakeFiles/cpp00_ex_00.dir/ex00/MegaPhone.cpp.o
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/cpp00.dir
+  OBJECT_DIR = CMakeFiles/cpp00_ex_00.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = cpp00
-  TARGET_PDB = cpp00.dbg
+  TARGET_FILE = cpp00_ex_00
+  TARGET_PDB = cpp00_ex_00.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target cpp00_ex_01
+
+
+#############################################
+# Order-only phony target for cpp00_ex_01
+
+build cmake_object_order_depends_target_cpp00_ex_01: phony || .
+
+build CMakeFiles/cpp00_ex_01.dir/ex01/PhoneBook.cpp.o: CXX_COMPILER__cpp00_ex_01_unscanned_Debug /home/kunel/CLionProjects/CPP-Module-00/ex01/PhoneBook.cpp || cmake_object_order_depends_target_cpp00_ex_01
+  DEP_FILE = CMakeFiles/cpp00_ex_01.dir/ex01/PhoneBook.cpp.o.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/cpp00_ex_01.dir
+  OBJECT_FILE_DIR = CMakeFiles/cpp00_ex_01.dir/ex01
+
+build CMakeFiles/cpp00_ex_01.dir/ex01/Contact.cpp.o: CXX_COMPILER__cpp00_ex_01_unscanned_Debug /home/kunel/CLionProjects/CPP-Module-00/ex01/Contact.cpp || cmake_object_order_depends_target_cpp00_ex_01
+  DEP_FILE = CMakeFiles/cpp00_ex_01.dir/ex01/Contact.cpp.o.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/cpp00_ex_01.dir
+  OBJECT_FILE_DIR = CMakeFiles/cpp00_ex_01.dir/ex01
+
+build CMakeFiles/cpp00_ex_01.dir/ex01/add_contact.cpp.o: CXX_COMPILER__cpp00_ex_01_unscanned_Debug /home/kunel/CLionProjects/CPP-Module-00/ex01/add_contact.cpp || cmake_object_order_depends_target_cpp00_ex_01
+  DEP_FILE = CMakeFiles/cpp00_ex_01.dir/ex01/add_contact.cpp.o.d
+  FLAGS = -g -std=gnu++98 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/cpp00_ex_01.dir
+  OBJECT_FILE_DIR = CMakeFiles/cpp00_ex_01.dir/ex01
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target cpp00_ex_01
+
+
+#############################################
+# Link the executable cpp00_ex_01
+
+build cpp00_ex_01: CXX_EXECUTABLE_LINKER__cpp00_ex_01_Debug CMakeFiles/cpp00_ex_01.dir/ex01/PhoneBook.cpp.o CMakeFiles/cpp00_ex_01.dir/ex01/Contact.cpp.o CMakeFiles/cpp00_ex_01.dir/ex01/add_contact.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/cpp00_ex_01.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = cpp00_ex_01
+  TARGET_PDB = cpp00_ex_01.dbg
 
 
 #############################################
@@ -105,7 +148,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/kunel/CLionProjects/CPP-Module-00/cmake-build-debug
 
-build all: phony cpp00
+build all: phony cpp00_ex_00 cpp00_ex_01
 
 # =============================================================================
 # Built-in targets
