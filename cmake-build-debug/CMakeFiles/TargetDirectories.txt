@@ -1,0 +1,3 @@
+/home/kunel/CLionProjects/cpp00/cmake-build-debug/CMakeFiles/cpp00.dir
+/home/kunel/CLionProjects/cpp00/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kunel/CLionProjects/cpp00/cmake-build-debug/CMakeFiles/rebuild_cache.dir
