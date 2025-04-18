@@ -17,56 +17,60 @@ Contact::~Contact()
 	std::cout << "Instance destroyed. Total: " << _instanceCount << std::endl;
 }
 
-std::string Contact::getFirstName(void)
+int Contact::getInstanceCount()
+{
+	return _instanceCount;
+}
+
+int Contact::getMaxInstances()
+{
+	return _MAX_INSTANCES;
+}
+const std::string& Contact::getFirstName(void) const
 {
 	return (this->_firstName);
 }
 
-std::string Contact::getLastName(void)
+const std::string& Contact::getLastName(void) const
 {
 	return (this->_lastName);
 }
 
-std::string Contact::getNickname(void)
+const std::string& Contact::getNickname(void) const
 {
 	return (this->_nickName);
 }
 
-std::string Contact::getPhoneNumber(void)
+const std::string& Contact::getPhoneNumber(void) const
 {
 	return (this->_phoneNumber);
 }
 
-std::string Contact::getDarkestSecret(void)
+const std::string& Contact::getDarkestSecret(void) const
 {
 	return (this->_darkestSecret);
 }
 
-void Contact::setFirstName(std::string str)
+void Contact::setFirstName(const std::string& str)
 {
 	this->_firstName = str;
-	return ;
 }
 
-void Contact::setLastName(std::string str)
+void Contact::setLastName(const std::string& str)
 {
 	this->_lastName = str;
-	return ;
 }
 
-void Contact::setNickname(std::string str)
+void Contact::setNickname(const std::string& str)
 {
 	this->_nickName = str;
-	return ;
 }
-void Contact::setPhoneNumber(std::string str)
+void Contact::setPhoneNumber(const std::string& str)
 {
 	this->_phoneNumber = str;
-	return ;
 }
 
-void Contact::setDarkestSecret(std::string str)
+void Contact::setDarkestSecret(const std::string& str)
 {
 	this->_darkestSecret = str;
-	return ;
 }

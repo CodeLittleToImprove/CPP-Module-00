@@ -15,16 +15,18 @@ private:
 public:
 	Contact();
 	~Contact();
-	void			setFirstName(std::string);
-	void			setLastName(std::string);
-	void			setNickname(std::string);
-	void			setPhoneNumber(std::string );
-	void			setDarkestSecret(std::string);
-	std::string		getFirstName(void);
-	std::string		getLastName(void);
-	std::string		getNickname(void);
-	std::string		getPhoneNumber(void);
-	std::string		getDarkestSecret(void);
+	static int getInstanceCount();
+	static int getMaxInstances();
+	void					setFirstName(const std::string&);
+	void					setLastName(const std::string&);
+	void					setNickname(const std::string&);
+	void					setPhoneNumber(const std::string&);
+	void					setDarkestSecret(const std::string&);
+	const std::string&		getFirstName(void)const;
+	const std::string&		getLastName(void)const;
+	const std::string&		getNickname(void)const;
+	const std::string&		getPhoneNumber(void)const;
+	const std::string&		getDarkestSecret(void)const;
 };
 
 Contact addContact(void);
