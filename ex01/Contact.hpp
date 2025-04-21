@@ -29,5 +29,5 @@ public:
 	const std::string&		getDarkestSecret(void)const;
 };
 
-Contact addContact(void);
+void addContact(Contact& new_contact);
 #endif //CPP00_CONTACT_HPP

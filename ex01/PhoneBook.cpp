@@ -4,7 +4,11 @@
 
 int main()
 {
-	int contact_Count = 0;
+	Contact phonebook[8];
+	for (int i = 0; i < 8; ++i)
+	{
+		std::cout << "\nAdding contact #" << i + 1 << std::endl;
+		addContact(phonebook[i]);
+	}
 
-	// should work on the main
 }

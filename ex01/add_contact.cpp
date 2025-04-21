@@ -10,17 +10,15 @@ static void promptAndSet(const std::string& prompt, void (Contact::*setter)(cons
 	(contact.*setter)(buffer); // pointer to a member function example syntax
 }
 
-Contact addContact()
+void addContact(Contact& new_contact)
 {
-	Contact new_contact;
-
 	promptAndSet("First name	: ", &Contact::setFirstName, new_contact);
-	promptAndSet("Last name		:", &Contact::setLastName, new_contact);
+	promptAndSet("Last name		: ", &Contact::setLastName, new_contact);
 	promptAndSet("Nickname         : ", &Contact::setNickname, new_contact);
 	promptAndSet("Phone number     : ", &Contact::setPhoneNumber, new_contact);
 	promptAndSet("Darkest secret   : ", &Contact::setDarkestSecret, new_contact);
 
 	std::cout << std::endl << "Contact saved" << std::endl;
-	return new_contact;
 }
+
 
