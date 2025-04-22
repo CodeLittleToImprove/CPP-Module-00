@@ -14,33 +14,39 @@ static bool isAllDigits(const std::string& str)
 static void promptAndSet(const std::string& prompt, void (Contact::*setter)(const std::string&), Contact& contact)
 {
 	std::string buffer;
-	std::cout << prompt;
-	// std::cin >> buffer; // first method would be used if only use a single word as input
-	std::getline(std::cin, buffer); // acts like getnextline
-	(contact.*setter)(buffer); // pointer to a member function example syntax
 
-//	std::string buffer; uncomment during testing
-//	while (true)
-//	{
-//		std::cout << prompt;
-//		std::getline(std::cin, buffer);
-//
-//		if (setter == &Contact::setPhoneNumber)
-//		{
-//			bool isValid = isAllDigits(buffer);
-//			if (!isValid)
-//			{
-//				std::cout << "Phone number must contain only digits. Please try again" << std::endl;
-//				continue;
-//			}
-//		}
-//		if (!buffer.empty())
-//		{
-//			(contact.*setter)(buffer);
-//			break;
-//		}
-//		else
-//			std::cout << "Input cannot be empty. Please try again." << std::endl;
+	if (!ENABLE_STRICT_INPUT)
+	{
+
+		std::cout << prompt;
+		// std::cin >> buffer; // first method would be used if only use a single word as input
+		std::getline(std::cin, buffer); // acts like getnextline
+		(contact.*setter)(buffer); // pointer to a member function example syntax
+	}
+	else
+	{
+		while (true)
+		{
+			std::cout << prompt;
+			std::getline(std::cin, buffer);
+
+			if (setter == &Contact::setPhoneNumber)
+			{
+				bool isValid = isAllDigits(buffer);
+				if (!isValid)
+				{
+					std::cout << "Phone number must contain only digits. Please try again" << std::endl;
+					continue;
+				}
+			}
+			if (!buffer.empty())
+			{
+				(contact.*setter)(buffer);
+				break;
+			}
+			else
+				std::cout << "Input cannot be empty. Please try again." << std::endl;
+		}
 	}
 }
 

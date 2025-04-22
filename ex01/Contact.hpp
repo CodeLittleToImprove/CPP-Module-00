@@ -6,6 +6,8 @@
 #include <string>
 #include <sstream>
 
+# define TESTMODE true
+# define ENABLE_STRICT_INPUT false
 class	Contact
 {
 private:

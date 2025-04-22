@@ -30,6 +30,27 @@ int main()
 	Contact	contacts[8];
 	int contactCount = 0;
 	int currentIndex = 0;
+
+	if (TESTMODE)
+	{
+		for (int i = 0; i < 8; ++i)
+		{
+			std::stringstream ss;
+			ss << "First" << i;
+			contacts[i].setFirstName(ss.str());
+			ss.str(""); ss << "Last" << i;
+			contacts[i].setLastName(ss.str());
+			ss.str(""); ss << "Nick" << i;
+			contacts[i].setNickname(ss.str());
+			ss.str(""); ss << "1234567" << i;
+			contacts[i].setPhoneNumber(ss.str());
+			ss.str(""); ss << "Secret" << i;
+			contacts[i].setDarkestSecret(ss.str());
+		}
+
+		contactCount = 8;
+		currentIndex = 0;
+	}
 	while (true)
 	{
 		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
