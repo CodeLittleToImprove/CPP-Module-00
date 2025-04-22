@@ -11,5 +11,5 @@ add_executable(cpp00_ex_01
         ex01/PhoneBook.cpp
         ex01/Contact.hpp
         ex01/Contact.cpp
-        ex01/add_contact.cpp
+        ex01/main.cpp
 )

@@ -1,87 +1,98 @@
-
 #include <iostream>
 #include "Contact.hpp"
 
-int ftStoi(const std::string& str)
+static bool isAllDigits(const std::string& str)
 {
-	int result = 0;
-	int sign = 1;
-	size_t i = 0;
-
-	if (str[0] == '-')
+	for (std::string::const_iterator it = str.begin(); it != str.end(); ++it)
 	{
-		sign = -1;
-		i = 1;
+		if (!std::isdigit(*it))
+			return false;
 	}
-
-	for (;i < str.length(); ++i)
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			result = result * 10 + (str[i] - '0');
-		else
-			throw std::invalid_argument("Invalid input string");
-	}
-
-	return sign * result;
+	return true;
 }
 
-int main()
+static void promptAndSet(const std::string& prompt, void (Contact::*setter)(const std::string&), Contact& contact)
 {
-	std::string	command;
-	Contact	contacts[8];
-	int contactCount = 0;
-	int currentIndex = 0;
-	while (true)
-	{
-		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
-		std::getline(std::cin, command);
+	std::string buffer;
+	std::cout << prompt;
+	// std::cin >> buffer; // first method would be used if only use a single word as input
+	std::getline(std::cin, buffer); // acts like getnextline
+	(contact.*setter)(buffer); // pointer to a member function example syntax
 
-		if (command == "ADD")
-		{
-			if (contactCount < 8)
-			{
-				std::cout << "adding contact #" << (contactCount + 1) << std::endl;
-				addContact(contacts[currentIndex]);
-				contactCount++;
-			}
-			else
-			{
-				std::cout << "Phonebook is full! Replacing oldest contact." << std::endl;
-				addContact(contacts[currentIndex]);
-			}
-			currentIndex = (currentIndex + 1) % 8;
-		}
-		else if (command == "SEARCH")
-		{
-			if (contactCount <= 0)
-			{
-				std::cout << "No contacts exists yet !" << std::endl;
-				continue;
-			}
-			displayContactsList(contacts, contactCount);
-
-			std::string indexInput;
-			std::cout << "Enter index of contact to display: ";
-			std::getline(std::cin, indexInput);
-			try
-			{
-				int index = ftStoi(indexInput);
-				if (index >= 0 && index < contactCount)
-					displayContactDetails(contacts[index]);
-				else
-					std::cout << "Invalid index. Please enter a number between 0 and " << (contactCount -1 ) << std::endl;
-			}
-			catch (const std::exception&)
-			{
-				std::cout << "Invalid input. Please enter a valid number." <<std::endl;
-			}
-		}
-		else if (command == "EXIT")
-		{
-			std::cout << "Existing program." << std::endl;
-			break;
-		}
-		else
-			std::cout << "Invalid command!" << std::endl;
+//	std::string buffer; uncomment during testing
+//	while (true)
+//	{
+//		std::cout << prompt;
+//		std::getline(std::cin, buffer);
+//
+//		if (setter == &Contact::setPhoneNumber)
+//		{
+//			bool isValid = isAllDigits(buffer);
+//			if (!isValid)
+//			{
+//				std::cout << "Phone number must contain only digits. Please try again" << std::endl;
+//				continue;
+//			}
+//		}
+//		if (!buffer.empty())
+//		{
+//			(contact.*setter)(buffer);
+//			break;
+//		}
+//		else
+//			std::cout << "Input cannot be empty. Please try again." << std::endl;
 	}
 }
+
+void addContact(Contact& new_contact)
+{
+	promptAndSet("First name	: ", &Contact::setFirstName, new_contact);
+	promptAndSet("Last name		: ", &Contact::setLastName, new_contact);
+	promptAndSet("Nickname         : ", &Contact::setNickname, new_contact);
+	promptAndSet("Phone number     : ", &Contact::setPhoneNumber, new_contact);
+	promptAndSet("Darkest secret   : ", &Contact::setDarkestSecret, new_contact);
+
+	std::cout << std::endl << "Contact saved" << std::endl;
+}
+
+static std::string formatField(const std::string& field)
+{
+	if (field.length() > 10)
+		return field.substr(0, 9) + ".";
+	else
+		return field;
+
+	// to prevent repetition like this for every field
+//	std::string firstName = contacts[i].getFirstName();
+//	if (firstName.length() > 10) {
+//		firstName = firstName.substr(0, 9) + ".";
+//	std::cout << std::setw(10) << firstName << "|";
+
+}
+void displayContactsList(const Contact contacts[], int contactCount)
+{
+	std::cout	<< std::setw(10) << "INDEX" << "|"
+				 << std::setw(10) << "FIRST NAME" << "|"
+				 << std::setw(10) << "LAST NAME" << "|"
+				 << std::setw(10) << "NICKNAME" << std::endl;
+	std::cout	<< std::string(43, '-') << std::endl;
+
+	for (int i = 0; i < contactCount; i++)
+	{
+		std::cout << std::setw(10) << i << "|";
+		std::cout << std::setw(10) << formatField(contacts[i].getFirstName()) << "|";
+		std::cout << std::setw(10) << formatField(contacts[i].getLastName()) << "|";
+		std::cout << std::setw(10) << formatField(contacts[i].getNickname()) << "|";
+		std::cout << std::endl;
+	}
+}
+
+void displayContactDetails(const Contact& contact)
+{
+	std::cout << "First name: " << contact.getFirstName() << std::endl;
+	std::cout << "Last name: " << contact.getLastName() << std::endl;
+	std::cout << "Nickname: " << contact.getNickname() << std::endl;
+	std::cout << "Phone number: " << contact.getPhoneNumber() << std::endl;
+	std::cout << "Darkest secret: " << contact.getDarkestSecret() << std::endl;
+}
+
