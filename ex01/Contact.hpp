@@ -2,6 +2,10 @@
 # ifndef CPP00_CONTACT_HPP
 # define CPP00_CONTACT_HPP
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <sstream>
+
 class	Contact
 {
 private:
@@ -30,4 +34,6 @@ public:
 };
 
 void addContact(Contact& new_contact);
+void displayContactDetails(const Contact& contact);
+void displayContactsList(const Contact contacts[], int contactCount);
 #endif //CPP00_CONTACT_HPP
