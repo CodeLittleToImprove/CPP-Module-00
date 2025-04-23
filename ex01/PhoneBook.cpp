@@ -1,5 +1,4 @@
-#include <iostream>
-#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 static bool isAllDigits(const std::string& str)
 {
@@ -50,7 +49,7 @@ static void promptAndSet(const std::string& prompt, void (Contact::*setter)(cons
 	}
 }
 
-void addContact(Contact& new_contact)
+void PhoneBook:: promptAndFillContact(Contact& new_contact)
 {
 	promptAndSet("First name	: ", &Contact::setFirstName, new_contact);
 	promptAndSet("Last name		: ", &Contact::setLastName, new_contact);
@@ -59,6 +58,68 @@ void addContact(Contact& new_contact)
 	promptAndSet("Darkest secret   : ", &Contact::setDarkestSecret, new_contact);
 
 	std::cout << std::endl << "Contact saved" << std::endl;
+}
+
+PhoneBook::PhoneBook()
+{
+	contactCount = 0;
+	currentIndex = 0;
+	std::cout << "Phonebook created" << std::endl;
+}
+
+PhoneBook::~PhoneBook()
+{
+	std::cout << "Phonebook destroyed" << std::endl;
+}
+
+int PhoneBook::getContactCount() const
+{
+	return contactCount;
+}
+
+const Contact* PhoneBook::getContacts() const
+{
+	return contacts;
+}
+
+const Contact& PhoneBook::getContactByIndex(int index) const
+{
+	if (index >= 0 && index < contactCount)
+		return contacts[index];
+	throw std::out_of_range("Index is out of range");
+}
+
+void PhoneBook::addContact()
+{
+	if (contactCount < 8) {
+		std::cout << "Adding contact #" << (contactCount + 1) << std::endl;
+		promptAndFillContact(contacts[currentIndex]);
+		contactCount++;
+	} else {
+		std::cout << "Phonebook is full! Replacing oldest contact." << std::endl;
+		promptAndFillContact(contacts[currentIndex]);
+	}
+	currentIndex = (currentIndex + 1) % 8;
+}
+
+void PhoneBook::fillTestContacts()
+{
+	for (int i = 0; i < 8; ++i)
+		{
+		std::stringstream ss;
+		ss << "First" << i;
+		contacts[i].setFirstName(ss.str());
+		ss.str(""); ss << "Last" << i;
+		contacts[i].setLastName(ss.str());
+		ss.str(""); ss << "Nick" << i;
+		contacts[i].setNickname(ss.str());
+		ss.str(""); ss << "1234567" << i;
+		contacts[i].setPhoneNumber(ss.str());
+		ss.str(""); ss << "Secret" << i;
+		contacts[i].setDarkestSecret(ss.str());
+	}
+	contactCount = 8;
+	currentIndex = 0;
 }
 
 static std::string formatField(const std::string& field)
@@ -73,8 +134,61 @@ static std::string formatField(const std::string& field)
 //	if (firstName.length() > 10) {
 //		firstName = firstName.substr(0, 9) + ".";
 //	std::cout << std::setw(10) << firstName << "|";
-
 }
+
+static int ftStoi(const std::string& str)
+{
+	int result = 0;
+	int sign = 1;
+	size_t i = 0;
+
+	if (str[0] == '-')
+	{
+		sign = -1;
+		i = 1;
+	}
+
+	for (;i < str.length(); ++i)
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			result = result * 10 + (str[i] - '0');
+		else
+			throw std::invalid_argument("Invalid input string");
+	}
+
+	return sign * result;
+}
+
+void searchContact(const PhoneBook& book)
+{
+	if (book.getContactCount() <= 0)
+	{
+		std::cout << "No contacts exist yet!" << std::endl;
+		return;
+	}
+
+	// Display the list of contacts
+	displayContactsList(book.getContacts(), book.getContactCount());
+
+	// Get the user's input for the index
+	std::string indexInput;
+	std::cout << "Enter index of contact to display: ";
+	std::getline(std::cin, indexInput);
+
+	try
+	{
+		int index = ftStoi(indexInput);  // Assuming ftStoi is a custom function that converts string to int
+		if (index >= 0 && index < book.getContactCount())
+			displayContactDetails(book.getContactByIndex(index));  // Display the details of the selected contact
+		else
+			std::cout << "Invalid index. Please enter a number between 0 and " << (book.getContactCount() - 1) << std::endl;
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "Invalid input. Please enter a valid number." << std::endl;
+	}
+}
+
 void displayContactsList(const Contact contacts[], int contactCount)
 {
 	std::cout	<< std::setw(10) << "INDEX" << "|"

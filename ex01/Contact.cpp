@@ -9,7 +9,7 @@ Contact::Contact()
 	if (_instanceCount >= _MAX_INSTANCES)
 		std::cout << "Maximum number of instances reached!" << _instanceCount << std::endl;
 	_instanceCount++;
-	std::cout << "Instance created. Total: " << _instanceCount << std::endl;
+	std::cout << "Contact Instance created. Total: " << _instanceCount << std::endl;
 }
 Contact::~Contact()
 {

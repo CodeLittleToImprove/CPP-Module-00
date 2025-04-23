@@ -6,8 +6,7 @@
 #include <string>
 #include <sstream>
 
-# define TESTMODE true
-# define ENABLE_STRICT_INPUT false
+
 class	Contact
 {
 private:
@@ -35,7 +34,4 @@ public:
 	const std::string&		getDarkestSecret(void)const;
 };
 
-void addContact(Contact& new_contact);
-void displayContactDetails(const Contact& contact);
-void displayContactsList(const Contact contacts[], int contactCount);
 #endif //CPP00_CONTACT_HPP
