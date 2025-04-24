@@ -16,7 +16,6 @@ static void promptAndSet(const std::string& prompt, void (Contact::*setter)(cons
 
 	if (!ENABLE_STRICT_INPUT)
 	{
-
 		std::cout << prompt;
 		// std::cin >> buffer; // first method would be used if only use a single word as input
 		std::getline(std::cin, buffer); // acts like getnextline
@@ -91,11 +90,14 @@ const Contact& PhoneBook::getContactByIndex(int index) const
 
 void PhoneBook::addContact()
 {
-	if (contactCount < 8) {
+	if (contactCount < 8)
+	{
 		std::cout << "Adding contact #" << (contactCount + 1) << std::endl;
 		promptAndFillContact(contacts[currentIndex]);
 		contactCount++;
-	} else {
+	}
+	else
+	{
 		std::cout << "Phonebook is full! Replacing oldest contact." << std::endl;
 		promptAndFillContact(contacts[currentIndex]);
 	}
@@ -105,16 +107,20 @@ void PhoneBook::addContact()
 void PhoneBook::fillTestContacts()
 {
 	for (int i = 0; i < 8; ++i)
-		{
+	{
 		std::stringstream ss;
 		ss << "First" << i;
 		contacts[i].setFirstName(ss.str());
+
 		ss.str(""); ss << "Last" << i;
 		contacts[i].setLastName(ss.str());
+
 		ss.str(""); ss << "Nick" << i;
 		contacts[i].setNickname(ss.str());
+
 		ss.str(""); ss << "1234567" << i;
 		contacts[i].setPhoneNumber(ss.str());
+
 		ss.str(""); ss << "Secret" << i;
 		contacts[i].setDarkestSecret(ss.str());
 	}
@@ -167,19 +173,17 @@ void searchContact(const PhoneBook& book)
 		return;
 	}
 
-	// Display the list of contacts
 	displayContactsList(book.getContacts(), book.getContactCount());
 
-	// Get the user's input for the index
 	std::string indexInput;
 	std::cout << "Enter index of contact to display: ";
 	std::getline(std::cin, indexInput);
 
 	try
 	{
-		int index = ftStoi(indexInput);  // Assuming ftStoi is a custom function that converts string to int
+		int index = ftStoi(indexInput);
 		if (index >= 0 && index < book.getContactCount())
-			displayContactDetails(book.getContactByIndex(index));  // Display the details of the selected contact
+			displayContactDetails(book.getContactByIndex(index));
 		else
 			std::cout << "Invalid index. Please enter a number between 0 and " << (book.getContactCount() - 1) << std::endl;
 	}

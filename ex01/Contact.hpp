@@ -20,8 +20,8 @@ private:
 public:
 	Contact();
 	~Contact();
-	static int getInstanceCount();
-	static int getMaxInstances();
+	static int				getInstanceCount();
+	static int				getMaxInstances();
 	void					setFirstName(const std::string&);
 	void					setLastName(const std::string&);
 	void					setNickname(const std::string&);

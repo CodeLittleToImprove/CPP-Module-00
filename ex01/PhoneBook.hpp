@@ -4,7 +4,7 @@
 #include "Contact.hpp"
 
 # define TESTMODE false
-# define ENABLE_STRICT_INPUT false
+# define ENABLE_STRICT_INPUT true
 class PhoneBook
 {
 private:
@@ -17,7 +17,7 @@ public:
 					~PhoneBook();
 	int				getContactCount() const;
 	const Contact*	getContacts() const; //pointer because we return an array
-	const Contact&	getContactByIndex(int index) const; // reference because we returning a single object
+	const Contact&	getContactByIndex(int index) const; // reference because we return a single object
 	void			addContact();
 	void			fillTestContacts();
 };

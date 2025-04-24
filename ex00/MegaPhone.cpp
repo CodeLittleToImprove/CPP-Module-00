@@ -13,7 +13,7 @@ void	megaphone(int argc, char *argv[])
 		{
 			input = argv[index];
 			for (size_t x = 0; x < input.length(); x++)
-				input[x] = std::toupper(input[x]);
+				input[x] = static_cast<char>(std::toupper(input[x]));
 			std::cout << input;
 			index++;
 		}

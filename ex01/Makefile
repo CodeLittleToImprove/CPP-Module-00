@@ -1,5 +1,3 @@
-# Makefile for megaphone.cpp
-
 # Compiler
 CXX = c++
 
@@ -7,13 +5,13 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Target executable
-TARGET = megaphone
+TARGET = phonebook
 
-# Source file
-SRC = MegaPhone.cpp
+# Source files (using wildcard)
+SRC = $(wildcard *.cpp)
 
-# Object file
-OBJ = MegaPhone.o
+# Object files (replace .cpp with .o)
+OBJ = $(SRC:.cpp=.o)
 
 # Default target
 all: $(TARGET)
@@ -22,16 +20,17 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
-# Compiling source file to object file
-$(OBJ): $(SRC)
-	$(CXX) $(CXXFLAGS) -c $(SRC)
+# Compiling each source file to object file
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $<
 
 # Clean up object files
 clean:
 	rm -f $(OBJ)
 
+# Remove both object files and executable
 fclean: clean
 	rm -f $(TARGET)
 
-# Optional: rebuild everything
-re: clean all
+# Optional: rebuild everything (full clean + rebuild)
+re: fclean all
